@@ -1,0 +1,15 @@
+rom flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/hello', methods=['GET'])
+def hello_world():
+    return "Hello, World! Type your message and I will respond!"
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_message = request.json.get('message', '')
+    return jsonify({'response': 'You said: {}'.format(user_message)})
+
+if __name__ == '__main__':
+    app.run(debug=True)
